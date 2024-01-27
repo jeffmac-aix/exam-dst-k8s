@@ -8,20 +8,24 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: my-sentiment-analysis-api
+      app: my-user-api
   template:
     metadata:
       labels:
-        app: my-sentiment-analysis-api
+        app: my-user-api
     spec:
       containers:
-      - name: my-sentiment-analysis-api
-        image: datascientest/fake-api:1.0.0
+      - name: my-user-api
+        image: datascientest/exam-k8s-jeffmac-userapi:1.0.0
         ports:
         - containerPort: 8000
+      - name: the-database
+        image: datascientest/mysql-k8s:1.0.0
+        ports:
+        - containerPort: 9000
 	env:
-        - name: DB_PWD
+        - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: sqldb-password
-              key: ZGF0YXNjaWVudGVzdDEyMzQ=
+              name: mysql-datascientest-rootpass
+              key: password

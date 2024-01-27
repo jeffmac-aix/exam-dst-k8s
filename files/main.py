@@ -4,11 +4,12 @@ from sqlalchemy.engine import create_engine
 
 # creating a FastAPI server
 server = FastAPI(title='User API')
+environment_type = 
 
 # creating a connection to the database
-mysql_url = ''  # to complete
+mysql_url = os.environ.get('MYSQL_URL')   
 mysql_user = 'root'
-mysql_password = ''  # to complete
+mysql_password = os.environ.get('MYSQL_PASSWORD')  
 database_name = 'Main'
 
 # recreating the URL connection
